@@ -1,7 +1,15 @@
-const mdb = require("mongoose");
-const loginSchema = mdb.Schema({
-  userName: String,
-  password: String,
+const mongoose = require("mongoose");
+
+const loginSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
 });
-const login_schema = mdb.model("login", loginSchema);
-module.exports= login_schema;
+
+module.exports = mongoose.model("Login", loginSchema);

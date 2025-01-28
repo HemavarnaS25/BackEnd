@@ -1,47 +1,67 @@
 const express = require("express");
 const path = require("path");
-const mdb = require("mongoose");
+const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const Signup = require("./models/signupSchema");
+const Login = require("./models/loginSchema");
 dotenv.config();
 const app = express();
 app.use(express.json());
-
-mdb
-  .connect("mongodb+srv://Mern2025:mern2025@mern2025.ar1xv.mongodb.net/")
+mongoose
+  .connect(process.env.MONGO_URI || "mongodb+srv://Mern2025:mern2025@mern2025.ar1xv.mongodb.net/")
   .then(() => {
-    console.log("MongoDB Connection Sucessfull");
+    console.log("MongoDB Connection Successful");
   })
   .catch((err) => {
-    console.log("MongoDB Connection Unsucessfull", err);
+    console.log("MongoDB Connection Unsuccessful", err);
   });
-
 app.get("/", (req, res) => {
   res.send(
-    "Welcome to Backend my friend\n Your RollerCoster starts from now on\n Fasten your codabase so you can catchup of what is been taught"
+    "Welcome to the Backend! Your rollercoaster starts now. Fasten your seatbelt and enjoy the code journey!"
   );
 });
+
+
 app.get("/static", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.post("/signup", (req, res) => {
-  var { firstName, lastName, username, email, password } = req.body;
+
+app.post("/signup", async (req, res) => {
+  const { firstName, lastName, username, email, password } = req.body;
   try {
-console.log("Inside try");
-      const newCustomer = new Signup({
-      firstName: firstName,
-      lastName: lastName,
-      username: username,
-      email: email,
-      password: password,
+    const newCustomer = new Signup({
+      firstName,
+      lastName,
+      username,
+      email,
+      password,
     });
-    newCustomer.save()
-    res.status(201).send("signup successfull");
+    await newCustomer.save();
+    res.status(201).send("Signup successful");
   } catch (err) {
-    res.status(400).send("Signup Unsuccessfull",err);
+    res.status(400).send("Signup unsuccessful. Error: " + err.message);
   }
 });
+
+app.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const user = await Signup.findOne({ username }); 
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+
+    if (user.password !== password) {
+      return res.status(401).send("Invalid credentials");
+    }
+
+    res.status(200).send("Login successful");
+  } catch (err) {
+    res.status(500).send("An error occurred during login. Error: " + err.message);
+  }
+});
+
 app.listen(3001, () => {
-  console.log("Server Started");
+  console.log("Server started on http://localhost:3001");
 });
