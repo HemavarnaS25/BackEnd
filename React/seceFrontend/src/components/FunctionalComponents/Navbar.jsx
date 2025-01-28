@@ -20,6 +20,7 @@ const Navbar=()=>{
                 <li><Link to='/about' className="link">About</Link></li>
                 <li><Link to='/gallery' className="link">Gallery</Link></li>
                 <li><Link to='/contact' className="link">Contact</Link></li>
+                <li><Link to='/signup-main' className="link">Sign Up</Link></li>
                 <div onMouseEnter={togglehDropdown} onMouseLeave={togglehDropdown} style={{ position: 'relative', display: 'inline-block' }}>
                         <span styling={{color:'black'}}>Hooks</span>
                         {hookdropdown && (

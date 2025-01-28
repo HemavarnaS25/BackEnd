@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import'./css/Signup.css';
 const Signup = () => {
   return (
+    // var [username,setUsername] =useState("")
     <div className="form-container">
       <h2>Signup</h2>
       <form>

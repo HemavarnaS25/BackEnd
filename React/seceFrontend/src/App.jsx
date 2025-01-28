@@ -20,6 +20,8 @@ import UseContext from './components/FunctionalComponents/Hooks/UseContext';
 import Memo from './components/FunctionalComponents/Memoization/Memo';
 import LazyLoadingWithSuspense from './components/FunctionalComponents/Memoization/LazyLoadingWithSuspense';
 import UseLocalStorage from './components/FunctionalComponents/Hooks/CustomHooks/UseLocalStorage';
+import SignUpMain from './components/FunctionalComponents/SignupMain';
+import LoginMain from './components/FunctionalComponents/LoginMain';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -34,25 +36,27 @@ function App() {
     <BrowserRouter>
       {isLoggedIn && <Navbar />} {/* Render Navbar only if logged in */}
       <Routes>
-        <Route path="/" element={isLoggedIn ? <Home /> : <Login onLogin={handleLogin} />} />
-        <Route path="/about" element={isLoggedIn ? <About /> : <Login onLogin={handleLogin} />} />
-        <Route path="/gallery" element={isLoggedIn ? <Gallery page="Gallery" image="SECE Logo" /> : <Login onLogin={handleLogin} />} />
-        <Route path="/contact" element={isLoggedIn ? <Contact /> : <Login onLogin={handleLogin} />} />
-        <Route path="/reactlm" element={isLoggedIn ? <ReactLifecycleMethods /> : <Login onLogin={handleLogin} />} />
-        <Route path="/useApi" element={isLoggedIn ? <UseEffectAPI /> : <Login onLogin={handleLogin} />} />
-        <Route path="/signup" element={isLoggedIn ? <Home /> : <Signup />} />
-        <Route path="/login" element={isLoggedIn ? <Home /> : <Login onLogin={handleLogin} />} />
-        <Route path="/useState" element={isLoggedIn ? <UseState /> : <Login onLogin={handleLogin} />} />
-        <Route path="/useEffect" element={isLoggedIn ? <UseEffect /> : <Login onLogin={handleLogin} />} />
-        <Route path="/useimage" element={isLoggedIn ? <UseEffectAPIimage /> : <Login onLogin={handleLogin} />} />
-        <Route path="/usereducer" element={isLoggedIn ? <UseReducer /> : <Login onLogin={handleLogin} />} />
-        <Route path="/useref" element={isLoggedIn ? <UseRef /> : <Login onLogin={handleLogin} />} />
-        <Route path="/usememo" element={isLoggedIn ? <UseMemo /> : <Login onLogin={handleLogin} />} />
-        <Route path="/usecallback" element={isLoggedIn ? <UseCallback /> : <Login onLogin={handleLogin} />} />
-        <Route path="/usecontext" element={isLoggedIn ? <UseContext /> : <Login onLogin={handleLogin} />} />
+        <Route path="/" element={isLoggedIn ? <Home /> : <SignUpMain onLogin={handleLogin} />} />
+        <Route path="/about" element={isLoggedIn ? <About /> : <SignUpMain onLogin={handleLogin} />} />
+        <Route path="/gallery" element={isLoggedIn ? <Gallery page="Gallery" image="SECE Logo" /> : <SignUpMain onLogin={handleLogin} />} />
+        <Route path="/contact" element={isLoggedIn ? <Contact /> : <SignUpMain onLogin={handleLogin} />} />
+        <Route path="/reactlm" element={isLoggedIn ? <ReactLifecycleMethods /> : <SignUpMain onLogin={handleLogin} />} />
+        <Route path="/useApi" element={isLoggedIn ? <UseEffectAPI /> : <SignUpMain onLogin={handleLogin} />} />
+        {/* <Route path="/signup" element={isLoggedIn ? <Home /> : <Signup />} /> */}
+        <Route path="/signup-main" element={isLoggedIn ? <Home /> : <SignUpMain />} />
+        {/* <Route path="/login" element={isLoggedIn ? <Home /> : <Login onLogin={handleLogin} />} /> */}
+        <Route path="/login-main" element={isLoggedIn ? <Home /> : <SignUpMain onLogin={handleLogin} />} />
+        <Route path="/useState" element={isLoggedIn ? <UseState /> : <SignUpMain onLogin={handleLogin} />} />
+        <Route path="/useEffect" element={isLoggedIn ? <UseEffect /> : <SignUpMain onLogin={handleLogin} />} />
+        <Route path="/useimage" element={isLoggedIn ? <UseEffectAPIimage /> : <SignUpMain onLogin={handleLogin} />} />
+        <Route path="/usereducer" element={isLoggedIn ? <UseReducer /> : <LoginMain onLogin={handleLogin} />} />
+        <Route path="/useref" element={isLoggedIn ? <UseRef /> : <LoginMain onLogin={handleLogin} />} />
+        <Route path="/usememo" element={isLoggedIn ? <UseMemo /> : <LoginMain onLogin={handleLogin} />} />
+        <Route path="/usecallback" element={isLoggedIn ? <UseCallback /> : <LoginMain onLogin={handleLogin} />} />
+        <Route path="/usecontext" element={isLoggedIn ? <UseContext /> : <LoginMain onLogin={handleLogin} />} />
         <Route path="/memo" element={isLoggedIn ? <Memo /> : <Login onLogin={handleLogin} />} />
-        <Route path="/lazy" element={isLoggedIn ? <LazyLoadingWithSuspense /> : <Login onLogin={handleLogin} />} />
-        <Route path="/usecustom" element={isLoggedIn ? <UseLocalStorage /> : <Login onLogin={handleLogin} />} />
+        <Route path="/lazy" element={isLoggedIn ? <LazyLoadingWithSuspense /> : <LoginMain onLogin={handleLogin} />} />
+        <Route path="/usecustom" element={isLoggedIn ? <UseLocalStorage /> : <LoginMain onLogin={handleLogin} />} />
         
       </Routes>
     </BrowserRouter>
